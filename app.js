@@ -9,6 +9,31 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+//MongoDB
+//Set up mongoose connection
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://kahootbird:<password>@cluster0-saxm5.azure.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+/*
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb+srv://kahootbird:mrf02gbPupCmiNbm@cluster0-saxm5.azure.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+*/
+
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -39,3 +64,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
